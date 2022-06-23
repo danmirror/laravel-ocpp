@@ -1,0 +1,45 @@
+// .chart{
+//    width: 80rem;
+//    height: 5rem;
+// }
+
+.container{
+   padding: 10px 1.5em;
+}
+.container-content{
+  padding: 20px 1.5em;
+  border:#111;
+}
+.title{
+   text-align: center;
+}
+hr{
+   width: 20rem;
+   border: 1px solid #111;
+}
+
+
+@media (max-width: 768px) {
+  label{
+    font-size: 13px;
+  }
+  small{
+    font-size: 9px!important;
+  }
+  .style-legend{
+    font-size: 13px!important;
+  }
+  .chart{
+    width: 350px;
+    height: 20rem;
+
+  }
+  .container{
+    padding: 10px 0em !important;
+  }
+  .container-content{
+    padding: 20px 1em;
+    border:#111;
+  }
+   
+}

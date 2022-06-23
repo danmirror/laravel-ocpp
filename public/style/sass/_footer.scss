@@ -1,0 +1,21 @@
+html, body {
+  height: 100%;
+}
+#page-content-wrapper{
+  display: flex;
+  flex-direction: column;
+}
+.content {
+  flex: 1 0 auto;
+  padding: 0 1.5em!important;
+  min-height: calc(100vh - 160px);
+}
+.footer {
+  height: 4em;
+  background-color: var(--light);
+  display: flex;
+  width: auto;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
