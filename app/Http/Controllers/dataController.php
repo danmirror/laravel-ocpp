@@ -16,13 +16,30 @@ class dataController extends Controller
     }
     public function store(Request $request)
     {
-		$data =  new Data();
-		$data->model = $request->header('model');
-		$data->firmware = $request->header('firmware');
-		$data->save();
-		return response()->json([
-		'id' => 1,
-		'description' => 'success',
-		],200);
+		$check = Data::where('idHW',$request->header('id'))->first();
+		
+		if(!$check)
+		{
+			$data =  new Data();
+			$data->idHW = $request->header('id');
+			$data->model = $request->header('model');
+			$data->vendor = $request->header('vendor');
+			$data->series = $request->header('series');
+			$data->firmware = $request->header('firmware');
+			$data->meterType = $request->header('meterType');
+			$data->meterSN = $request->header('meterSerialNumber');
+			$data->save();
+
+			return response()->json([
+				'id' => $request->header('id'),
+				'description' => 'success',
+				],200);
+		}
+		else{
+			return response()->json([
+				'id' => $request->header('id'),
+				'description' => 'already exist',
+				],200);
+		}
     }
 }

@@ -6,6 +6,7 @@
   --white: #ffffff;
   --gray : #eeeeee;
   --light:#f4f7fc;
+  --green: #42b549;
 }
 .blue-violet{
   color:var(--blue-violet);
@@ -22,4 +23,13 @@
 .hover-blue-violet:hover{
   color:var(--white);
   background-color:var(--blue-violet-hover);
+}
+
+.bg-green{
+  color :var(--white);
+}
+
+.hover-bg-green:hover{
+  color :var(--white);
+  background-color:var(--green);
 }

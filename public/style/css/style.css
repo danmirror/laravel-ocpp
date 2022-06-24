@@ -72,6 +72,9 @@
   border-radius: 5px;
   font-size: 25px; }
 
+.table {
+  font-size: 12px; }
+
 .container {
   padding: 10px 1.5em; }
 
@@ -215,7 +218,8 @@ html, body {
   --blue: #1e90ff;
   --white: #ffffff;
   --gray: #eeeeee;
-  --light:#f4f7fc; }
+  --light:#f4f7fc;
+  --green: #42b549; }
 
 .blue-violet {
   color: var(--blue-violet); }
@@ -231,6 +235,13 @@ html, body {
 .hover-blue-violet:hover {
   color: var(--white);
   background-color: var(--blue-violet-hover); }
+
+.bg-green {
+  color: var(--white); }
+
+.hover-bg-green:hover {
+  color: var(--white);
+  background-color: var(--green); }
 
 #map {
   position: absolute;

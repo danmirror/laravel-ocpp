@@ -15,9 +15,13 @@ class CreateDataTable extends Migration
     {
         Schema::create('data', function (Blueprint $table) {
             $table->id();
+            $table->string('idHW');
             $table->string('model');
+            $table->string('vendor');
+            $table->string('series');
             $table->string('firmware');
-      
+            $table->string('meterType');
+            $table->string('meterSN');
             $table->timestamps();
 
         });
