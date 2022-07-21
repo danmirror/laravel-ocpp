@@ -12,13 +12,13 @@
               <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   @if(session('name'))
-                    <span style="text-transform: capitalize">{{$user->name}}</span>
+                    <span style="text-transform: capitalize">{{Session('name')}}</span>
                   @else
                     <span style="text-transform: capitalize">Guess</span>
                   @endif
                   </a>
                   <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item text-danger" href=""><i class="fas fa-power-off mr-1"></i> Logout</a>
+                    <a class="dropdown-item text-danger" href="{{route('logout')}}"><i class="fas fa-power-off mr-1"></i> Logout</a>
                   </div>
               </li>
             </ul>

@@ -1,0 +1,30 @@
+.center-auth{
+    margin: auto;
+    width: 50%;
+}
+
+.panel-auth{
+    background-color: white;
+    padding: 20px;
+}
+
+.background-auth{
+    background-color: rgb(80, 169, 232);
+}
+
+.center-image{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+@media (max-width: 768px) {
+    .center-auth{
+        margin: auto;
+        width: 90%;
+    }
+    .panel-auth{
+        padding: 10px;
+    }
+}
