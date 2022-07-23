@@ -12,7 +12,7 @@
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
   
-	<link href="{{asset('style/css/style.css') }}" rel="stylesheet">
+	<link href="{{asset('style/css/style.css') }}" rel="stylesheet" type="text/css" >
 	<title>Document</title>
 </head>
 <body class="background-auth">
