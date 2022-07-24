@@ -6,6 +6,21 @@
 {
   font-size: 12px;
 }
+.table-overflow
+{ 
+  overflow-x: scroll; 
+}
+
+@media(max-width: 480px) {
+  .table-overflow
+  { 
+    width: 300px;
+  }
+  .table
+  {
+    font-size: 8px;
+  }
+}
 
 .container{
    padding: 10px 1.5em;

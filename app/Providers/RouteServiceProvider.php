@@ -48,10 +48,12 @@ class RouteServiceProvider extends ServiceProvider
                 ->group(base_path('routes/web.php'));
         });
 
-        // force https
-        resolve(\Illuminate\Routing\UrlGenerator::class)->forceScheme('https');
+        if($this->app->environment('production')) {
+            // force https
+            resolve(\Illuminate\Routing\UrlGenerator::class)->forceScheme('https');
 
-        parent::boot();
+            parent::boot();
+        }
     }
 
     /**

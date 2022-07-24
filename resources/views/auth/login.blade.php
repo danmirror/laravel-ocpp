@@ -22,6 +22,13 @@
 			<div>
 				<img class="center-image" src="/image/logo" alt="" style="width: 170px;">   
 			</div>
+			
+			@if(Session::has('alert'))
+				<div class="alert alert-danger">
+					<div>{{Session::get('alert')}}</div>
+				</div>
+			@endif
+
 			<form action="{{route('login-store')}}" method="post">
 				@csrf
 				<div class="form-group">

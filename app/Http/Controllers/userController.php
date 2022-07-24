@@ -67,7 +67,7 @@ class userController extends Controller
                 $data->email = $request->email;
                 $data->password = bcrypt($request->password);
                 $data->save();
-                return redirect('login')->with('alert-success','Kamu berhasil Register');
+                return redirect('auth/login')->with('alert-success','Kamu berhasil Register');
             }
             else{
                 return redirect('auth/registration')->with('alert','Password atau Email, Salah !');

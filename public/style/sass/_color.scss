@@ -3,6 +3,7 @@
   --blue-violet-hover :#b588df;
   --slate-blue:#7B68EE;
   --blue: #1e90ff;
+  --blue-card:#7b93dd;
   --white: #ffffff;
   --gray : #eeeeee;
   --light:#f4f7fc;
@@ -32,4 +33,9 @@
 .hover-bg-green:hover{
   color :var(--white);
   background-color:var(--green);
+}
+
+.hover-bg-blue:hover{
+  color :var(--white);
+  background-color:var(--blue-card);
 }

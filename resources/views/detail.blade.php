@@ -2,22 +2,13 @@
 @section('title','OCPP')
 @section('content')
 
-<?php
-	$countData = 0;
-	$model = 0;
 
-	foreach($data as $dt)
-	{
-		$model = $dt->model;
-		$countData++;
-	}
-?>
 
   <div class="d-flex" id="wrapper">
     <!-- Sidebar -->
     <div class="bg-light shadow fixed-sidebar" id="sidebar-wrapper">
       <div class="sidebar-heading">
-        <img src="image/chargers.png" alt="" style="width: 170px;">   
+        <img src="/image/chargers.png" alt="" style="width: 170px;">   
       </div>
       <div class="list-group list-group-flush">
         <a href="{{route('home')}}" class="d-flex align-items-center list-group-item list-group-item-action hover-bg-blue rounded">
@@ -49,90 +40,79 @@
       @include('template.nav')
 
       <div class="container content">
-        <h3 class="mt-2 mb-4 title">Dashboard</h3>
+        <h3 class="mt-2 mb-4 title">Detail</h3>
 
-				<div class="row justify-content-around ">
-
-					<div class="col-sm-4 margin-left mb-2">
-						<div class="card border-left-one shadow " >
-								<div class="card-body">
-										<div class=" font-weight-bold text-primary text-uppercase mb-1">
-												Amount ID
-										</div>
-										<div class="h5 mb-0 font-weight-bold text-gray-800">{{$countData}}</div>
-								</div>
-						</div>
-					</div>
-					<div class="col-sm-4 margin-left mb-2">
-						<div class="card border-left-one shadow " >
-								<div class="card-body">
-										<div class=" font-weight-bold text-primary text-uppercase mb-1">
-												Version ocpp
-										</div>
-										<div class="h5 mb-0 font-weight-bold text-gray-800">1.6</div>
-								</div>
-						</div>
-					</div>
-					<div class="col-sm-4 margin-left mb-2">
-						<div class="card border-left-one shadow " >
-								<div class="card-body">
-										<div class=" font-weight-bold text-primary text-uppercase mb-1">
-												Latest data
-										</div>
-										<div class="h5 mb-0 font-weight-bold text-gray-800">{{$model}}</div>
-								</div>
-						</div>
-					</div>
-
-				</div>
-        
-				
+	
         <div class="container-content shadow mt-5">
-          <div class="row justify-content-between ">
-            <div class="ml-2 col-6 mb-4">
-              <h4 class="font mb-1">Recent Data</h4 >
-            </div>
-          </div>
-          <div class="row">
-            <div class=" col-12 mb-4 table-overflow">
+
+					<div class="row">
+            <div class=" col-6 mb-4 table-overflow">
             	<table class="table">
 								<thead>
 									<tr>
-										<th scope="col">#</th>
-										<th scope="col">ID</th>
-										<th scope="col">Model</th>
-										<th scope="col">vendor</th>
-										<th scope="col">Series</th>
-										<th scope="col">Firmware</th>
-                    <th scope="col">status</th>
+										<th scope="col">Spesifikasi</th>
 									</tr>
 								</thead>
 								<tbody>
-
-								@foreach($data as $dt)
 									<tr>
-										<th scope="row">1</th>
-										<td><a href="{{route('detail',$dt->idHW)}}">{{$dt->idHW}}</a></td>
-										<td>{{$dt->model}}</td>
-										<td>{{$dt->vendor}}</td>
-										<td>{{$dt->series}}</td>
-										<td>{{$dt->firmware}}</td>
-                    <td>{{$status[$dt->idHW]}}</td>
+										<th scope="col" style="color: #888;">ID</th>
+										<th scope="row" style="color: #888;">{{$data->idHW}}</th>
 									</tr>
-								@endforeach
+									<tr>
+										<th scope="row" style="color: #888;">Model</th>
+										<th scope="row" style="color: #888;">{{$data->model}}</th>
+									</tr>
+									<tr>
+										<th scope="row" style="color: #888;">Vendor</th>
+										<th scope="row" style="color: #888;">{{$data->vendor}}</th>
+									</tr>
+									<tr>
+										<th scope="row" style="color: #888;">Model</th>
+										<th scope="row" style="color: #888;">{{$data->idHW}}</th>
+									</tr>
+									<tr>
+										<th scope="row" style="color: #888;">Series</th>
+										<th scope="row" style="color: #888;">{{$data->series}}</th>
+									</tr>
+									<tr>
+										<th scope="row" style="color: #888;">Firmware</th>
+										<th scope="row" style="color: #888;">{{$data->firmware}}</th>
+									</tr>
 								</tbody>
 							</table>
             </div>
-            <!-- <div class="col-sm-6 mb-4">
-              <div>
-                <canvas id="myChart" width="200" height="100"></canvas>
-              </div>
-            </div> -->
+						<div class=" col-6 mb-4 table-overflow">
+            	<table class="table">
+								<thead>
+									<tr>
+										<th scope="col">Log</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<th scope="row" style="color: #888;">Last Update</th>
+										<th scope="row" style="color: #888;">{{date('F d, Y H:m:i', strtotime('+7 hour',strtotime($routine->updated_at)) )}}</th>
+									</tr>
+									<tr>
+										<th scope="row" style="color: #888;">Longitude</th>
+										<th scope="row" style="color: #888;">{{$settings->long}}</th>
+									</tr>
+									<tr>
+										<th scope="row" style="color: #888;">Latitude</th>
+										<th scope="row" style="color: #888;">{{$settings->lat}}</th>
+									</tr>
+								
+								</tbody>
+							</table>
+            </div>
           </div>
-
-
-          <!-- <canvas id="condition" width="400" height="100"></canvas> -->
+         
         </div>
+				<div class="container-content shadow mt-5 map">
+					<div class="map_box_container">
+						<div id="map"></div>
+					</div>
+				</div>
       </div>
       
       @include('template.footer')
@@ -140,38 +120,53 @@
     <!-- /#page-content-wrapper -->
   </div>
 
-  <script>
-    var labels = [];
-		var dataFW = [];
+	<script>
+		var loc = [<?= json_encode($settings->long);?>,<?= json_encode($settings->lat);?>];
+		console.log(loc);
+
+		mapboxgl.accessToken = 'pk.eyJ1IjoiZGFudWFuZHJlYW4iLCJhIjoiY2tteHBhOTFyMHI0aTJwcXNpcTIwYjNleSJ9.oMR_l45ewZHKxkXUmEjDcg';
+		const map = new mapboxgl.Map({
+		container: 'map', // container ID
+		style: 'mapbox://styles/mapbox/streets-v11', // style URL
+		center: loc, // starting center in [lng, lat]
+		zoom: 13, // starting zoom
+		// projection: 'globe' // display map as a 3D globe
+		});
+
 		
-		let i =0;
+		map.on("load", () => {
+			map.addSource("mine", {
+				type: "geojson",
+				data: {
+					type: "FeatureCollection",
+					features: [
+						{
+							type: "Feature",
+							geometry: {
+								type: "Point",
+								coordinates: loc
+							}
+						}
+					]
+				}
+			});
 
-		@foreach($data as $dt)
-			labels.push(<?=json_encode($dt->idHW)?>)
-			dataFW[i] = <?=json_encode($dt->firmware)?>;
-			i = i+1;
-		@endforeach
+			map.addLayer({
+				id: "mylayer",
+				source: "mine",
+				type: "circle",
+				paint: {
+					// Make circles larger as the user zooms from z12 to z22.
+					"circle-radius": 10,
+					// Color circles by ethnicity, using a `match` expression.
+					"circle-color": "red",
+					"circle-stroke-color": "red",
+					"circle-opacity": 0.5,
+					"circle-stroke-opacity": 1,
+					"circle-stroke-width": 5
+				}
+			});
+		});
+	</script>
 
-  const data = {
-    labels: labels,
-    datasets: [{
-      label: 'firmware version',
-      backgroundColor: 'rgb(255, 99, 132)',
-      borderColor: 'rgb(255, 99, 132)',
-      data: dataFW,
-    }]
-  };
-
-  const config = {
-    type: 'radar',
-    data: data,
-    options: {}
-  };
-
-  const myChart = new Chart(
-    document.getElementById('myChart'),
-    config
-  );
-  </script>
-  
 @endsection

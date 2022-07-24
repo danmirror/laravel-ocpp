@@ -16,6 +16,10 @@ use App\Http\Controllers\userController;
 */
 
 Route::get('/', [dataController::class, 'index'])->name('home');
+Route::get('/detail/{id}', [dataController::class, 'show'])->name('detail');
+Route::get('/setting', [dataController::class, 'setting'])->name('setting');
+Route::post('/setting/store', [dataController::class, 'settingStore'])->name('setting-store');
+
 Route::get('/auth/login', [userController::class, 'login'])->name('login');
 Route::get('/auth/logout', [userController::class, 'logout'])->name('logout');
 Route::get('/auth/registration', [userController::class, 'create'])->name('registration');

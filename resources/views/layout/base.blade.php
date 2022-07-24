@@ -21,8 +21,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
   
   <!-- maps -->
-  <!-- <link href="https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.css" rel="stylesheet"> -->
-  <!-- <script src="https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.js"></script> -->
+  <link href="https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.css" rel="stylesheet">
+  <script src="https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.js"></script>
 
   <!-- chart -->
    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

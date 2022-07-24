@@ -18,7 +18,11 @@
                   @endif
                   </a>
                   <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                  @if(session('name'))
                     <a class="dropdown-item text-danger" href="{{route('logout')}}"><i class="fas fa-power-off mr-1"></i> Logout</a>
+                  @else
+                    <a class="dropdown-item text-success" href="{{route('login')}}"><i class="fas fa-power-off mr-1"></i> login</a>
+                  @endif
                   </div>
               </li>
             </ul>

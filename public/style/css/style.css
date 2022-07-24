@@ -75,6 +75,15 @@
 .table {
   font-size: 12px; }
 
+.table-overflow {
+  overflow-x: scroll; }
+
+@media (max-width: 480px) {
+  .table-overflow {
+    width: 300px; }
+
+  .table {
+    font-size: 8px; } }
 .container {
   padding: 10px 1.5em; }
 
@@ -216,6 +225,7 @@ html, body {
   --blue-violet-hover:#b588df;
   --slate-blue:#7B68EE;
   --blue: #1e90ff;
+  --blue-card:#7b93dd;
   --white: #ffffff;
   --gray: #eeeeee;
   --light:#f4f7fc;
@@ -242,6 +252,10 @@ html, body {
 .hover-bg-green:hover {
   color: var(--white);
   background-color: var(--green); }
+
+.hover-bg-blue:hover {
+  color: var(--white);
+  background-color: var(--blue-card); }
 
 #map {
   position: absolute;
@@ -395,5 +409,19 @@ html, body {
 
   .panel-auth {
     padding: 10px; } }
+.map_box_container {
+  position: relative;
+  height: 100% !important;
+  width: 100% !important; }
+
+#map {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%; }
+
+.map {
+  height: 600px;
+  min-width: 400px; }
 
 /*# sourceMappingURL=style.css.map */
