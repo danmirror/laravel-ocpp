@@ -90,13 +90,15 @@ class dataController extends Controller
 
 	public function show($id)
     {
+		$data = Data::all();
 		$settings = Setting::where('idHW',$id)->first();
-		$data = Data::where('idHW',$id)->first();
+		$dataSelection = Data::where('idHW',$id)->first();
 		$routine = Routine::where('idHW',$id)->first();
 
-		// dd($data);
+		// dd($dataSelection);
         return view('detail',[
-			'data'=>$data,
+			'data' => $data,
+			'dataSelection'=>$dataSelection,
 			'routine'=>$routine,
 			'settings'=>$settings
 		]);
