@@ -51,7 +51,7 @@
 					@csrf
 					<div class="form-group">
 						<label for="selection">ID</label>
-						<select class="form-control" name="idHW" id="selection">
+						<select class="form-control" name="idHW" id="selection" requred>
 							@foreach($data as $dt)
 							<option value="{{$dt->idHW}}">{{$dt->idHW}}</option>
 							@endforeach
