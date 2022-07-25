@@ -20,8 +20,6 @@ class CreateDataTable extends Migration
             $table->string('vendor');
             $table->string('series');
             $table->string('firmware');
-            $table->string('meterType');
-            $table->string('meterSN');
             $table->timestamps();
 
         });

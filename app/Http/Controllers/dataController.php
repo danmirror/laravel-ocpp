@@ -52,8 +52,6 @@ class dataController extends Controller
 			$data->vendor = $request->header('vendor');
 			$data->series = $request->header('series');
 			$data->firmware = $request->header('firmware');
-			$data->meterType = $request->header('meterType');
-			$data->meterSN = $request->header('meterSerialNumber');
 			
 			if($data->save()){
 				return response()->json([
