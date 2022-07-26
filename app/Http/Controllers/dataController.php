@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Data;
+use App\Models\BootNotification;
 use App\Models\Setting;
-use App\Models\Routine;
+use App\Models\Heartbeat;
 use Illuminate\Http\Request;
+use App\Models\StatusNotification;
 
 use Illuminate\Support\Facades\Session;
 
@@ -14,87 +15,48 @@ class dataController extends Controller
     {
 		$status = [];
 		
-		$data = Data::all();
-		$routine = Routine::all();
+		$data = BootNotification::all();
+		$statusNotification = StatusNotification::all();
 
-		foreach($routine as $rt)
+		foreach($data as $dt)
         {
+			foreach($statusNotification as $st)
+        	{
+				if($dt->idHW == $st->idHW)
+				{
+					$status = [$st->idHW =>$st->status];
+
+				}
+			}
 			// dd($rt->updated_at->timestamp, $rt->updated_at->timestamp+1000, now()->timestamp);
 			// dd();
-			if($rt->updated_at->timestamp+1000 > now()->timestamp)
-			{
-				$status = [$rt->idHW =>'enabled'];
-			}
-			else{
-				$status = [$rt->idHW =>'disabled'];
-			}
+			// if($rt->updated_at->timestamp+1000 > now()->timestamp)
+			// {
+			// }
+			// else{
+			// 	$status = [$rt->idHW =>'disabled'];
+			// }
+
         }
 		// dd($status);s
 
 
         return view('index',[
 			'data' => $data,
-			'status' => $status
+			'status' => $status,
 		]);
 
     }
     public function store(Request $request)
     {	
-		$check = Data::where('idHW',$request->header('id'))->first();
-		$checkLog = Routine::where('idHW',$request->header('idlog'))->first();
-		
-		if(!$check && $request->header('id')){
-			$data =  new Data();
-			$data->idHW = $request->header('id');
-			$data->model = $request->header('model');
-			$data->vendor = $request->header('vendor');
-			$data->series = $request->header('series');
-			$data->firmware = $request->header('firmware');
-			
-			$setting = new Setting();
-			$setting->idHW = $request->header('id');
-			$setting->save();
-
-			if($data->save()){
-				return response()->json([
-					'id' => $request->header(),
-					'description' => 'success',
-					],200);
-			}
-		
-		}
-		if($request->header('idlog')){
-			if(!$checkLog){
-				$log = new Routine();
-				$log->idHW = $request->header('idlog');
-
-				if($log->save()){
-					return response()->json([
-						'id' => $request->header('idlog'),
-						'description' => 'log success',
-						],200);
-				}
-				
-			}
-			else{
-				//just update time
-				$checkLog->updated_at = now();
-				if($checkLog->save()){
-					return response()->json([
-						'id' => $request->header('idlog'),
-						'description' => 'update Log success',
-						],200);
-				}
-			}
-		}
     }
 
 	public function show($id)
     {
-		$data = Data::all();
+		$data = BootNotification::all();
 		$settings = Setting::where('idHW',$id)->first();
-		$dataSelection = Data::where('idHW',$id)->first();
-		$routine = Routine::where('idHW',$id)->first();
+		$dataSelection = BootNotification::where('idHW',$id)->first();
+		$routine = Heartbeat::where('idHW',$id)->first();
 
 		// dd($dataSelection);
         return view('detail',[
@@ -111,7 +73,7 @@ class dataController extends Controller
 		{
 			return redirect('/')->with('alert','login');
 		}
-		$data = Data::all();
+		$data = BootNotification::all();
 		return view('setting',[
 			'data' => $data
 		]);

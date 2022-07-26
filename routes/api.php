@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\dataController;
+use App\Http\Controllers\ocppController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -16,6 +16,7 @@ use App\Http\Controllers\dataController;
 */
 
 Route::group(['prefix'=>'v1'],function(){
-    Route::get('data', [dataController::class, 'store']);
-    Route::post('data', [dataController::class, 'store']);
+    Route::post('heartbeat', [ocppController::class, 'heartbeat']);
+    Route::post('bootnotification', [ocppController::class, 'boot_notification']);
+    Route::post('statusnotification', [ocppController::class, 'status_notification']);
   });

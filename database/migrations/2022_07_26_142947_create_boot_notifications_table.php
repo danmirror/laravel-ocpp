@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRoutinesTable extends Migration
+class CreateBootNotificationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,13 @@ class CreateRoutinesTable extends Migration
      */
     public function up()
     {
-        Schema::create('routines', function (Blueprint $table) {
+        Schema::create('boot_notifications', function (Blueprint $table) {
             $table->id();
             $table->string('idHW');
+            $table->string('model');
+            $table->string('vendor');
+            $table->string('series');
+            $table->string('firmware');
             $table->timestamps();
         });
     }
@@ -27,6 +31,6 @@ class CreateRoutinesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('routines');
+        Schema::dropIfExists('boot_notifications');
     }
 }
