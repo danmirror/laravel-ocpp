@@ -51,12 +51,17 @@ class dataController extends Controller
 			$data->series = $request->header('series');
 			$data->firmware = $request->header('firmware');
 			
+			$setting = new Setting();
+			$setting->idHW = $request->header('id');
+			$setting->save();
+
 			if($data->save()){
 				return response()->json([
 					'id' => $request->header(),
 					'description' => 'success',
 					],200);
 			}
+		
 		}
 		if($request->header('idlog')){
 			if(!$checkLog){
@@ -115,8 +120,8 @@ class dataController extends Controller
 	public function settingStore(Request $request)
 	{
 		// dd($request->idHW);
-		$check = Setting::where('idHW',$request->idHW)->first();
-		if(!$check){
+		$checkSet = Setting::where('idHW',$request->idHW)->first();
+		if(!$checkSet){
 			$data = new Setting();
 			$data->idHW = $request->idHW;
 			$data->long = $request->long;
@@ -125,10 +130,10 @@ class dataController extends Controller
 			return redirect('/')->with('succes','done');
 		}
 		else{
-			$check->idHW = $request->idHW;
-			$check->long = $request->long;
-			$check->lat = $request->lat;
-			$check->save();
+			$checkSet->idHW = $request->idHW;
+			$checkSet->long = $request->long;
+			$checkSet->lat = $request->lat;
+			$checkSet->save();
 			return redirect('/')->with('succes','done');
 		}
 
