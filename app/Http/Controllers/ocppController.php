@@ -49,25 +49,7 @@ class ocppCOntroller extends Controller
         $data = heartbeat::where('idHW',$request->header('idST'))->first();
 
         if($request->header('idST')){
-			if(!$data){
-				$ST = new StatusNotification();
-				$ST->idHW           = $request->header('idST');
-                $ST->connectorId    = $request->header('connectorId');
-                $ST->info           = $request->header('info');
-                $ST->status         = $request->header('status');
-                $ST->vendorId       = $request->header('vendorId');
-                $ST->vendorErrorCode = $request->header('vendorErrorCode');
-
-				if($ST->save()){
-					return response()->json([
-						'id' => $request->header('idST'),
-						'description' => 'status_notification success',
-						],200);
-				}
-				
-			}
-			else{
-                
+		
                 $data->connectorId      = $request->header('connectorId');
                 $data->info             = $request->header('info');
                 $data->status           = $request->header('status');
@@ -80,15 +62,7 @@ class ocppCOntroller extends Controller
 						'description' => 'update status_notification success',
 						],200);
 				}
-			}
 		}
-
-        // $table->string('connectorId');
-        //     $table->string('errorCode');
-        //     $table->string('info');
-        //     $table->string('status');
-        //     $table->string('vendorId');
-        //     $table->string('vendorErrorCode');
 
     }
     public function heartbeat(Request $request)
