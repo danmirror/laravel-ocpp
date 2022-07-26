@@ -39,9 +39,7 @@ class dataController extends Controller
 
     }
     public function store(Request $request)
-    {
-	
-		
+    {	
 		$check = Data::where('idHW',$request->header('id'))->first();
 		$checkLog = Routine::where('idHW',$request->header('idlog'))->first();
 		

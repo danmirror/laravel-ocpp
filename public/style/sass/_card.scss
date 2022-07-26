@@ -1,6 +1,8 @@
 .card{
     max-width: 18rem;
  }
+
+
  .border-left-one {
     border-left: .35rem solid 
     #7b93dd !important;
@@ -42,7 +44,16 @@
     margin-left: 0 !important;
  }
  @media(max-width: 768px){
-    .margin-left{
-       margin-left: 20px;
-    }
+	.margin-left{
+		margin-left: 20px;
+	}
+	.card-user 
+	{
+		.card-body{
+			padding: 1.0rem;
+		}
+		.card-title{
+			font-size: 12px;
+		}
+	}
  }

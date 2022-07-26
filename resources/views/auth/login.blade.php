@@ -33,7 +33,7 @@
 				@csrf
 				<div class="form-group">
 					<label for="username">User Name</label>
-					<input name="username" type="texts" class="form-control" id="username">
+					<input name="username" type="text" class="form-control" id="username">
 				</div>
 				<div class="form-group">
 					<label for="password">Password</label>

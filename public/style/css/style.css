@@ -83,7 +83,10 @@
     width: 300px; }
 
   .table {
-    font-size: 8px; } }
+    font-size: 8px; }
+
+  .table th {
+    padding: 0.30rem; } }
 .container {
   padding: 10px 1.5em; }
 
@@ -384,7 +387,12 @@ html, body {
 
 @media (max-width: 768px) {
   .margin-left {
-    margin-left: 20px; } }
+    margin-left: 20px; }
+
+  .card-user .card-body {
+    padding: 1.0rem; }
+  .card-user .card-title {
+    font-size: 12px; } }
 .center-auth {
   margin: auto;
   width: 50%; }

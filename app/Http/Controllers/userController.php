@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Session;
-
 use App\Models\User;
+use App\Models\DataUser;
+
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class userController extends Controller
 {
@@ -15,67 +16,60 @@ class userController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function login()
+    public function index()
     {
-        return view('auth.login');
+        if(Session::get('role') !="admin")
+		{
+			return redirect('/')->with('alert','login');
+		}
+        $user=[];
+        $userData = DataUser::all();
+        $userAll = User::all();
+
+        $count = 0;
+        foreach($userAll as $users){
+            foreach($userData as $usersData){
+                if($users->name == $usersData->name){
+                    
+                    if($users->role != "admin"){
+                        $user[] = [
+                            'name' => $users->name,
+                            'email' => $users->email,
+                            'no' => $usersData->no,
+                        ];
+                        $count++;
+                    }
+                }
+            }
+            // dd($user, $userAll);
+        }
+
+
+        return view('user.user', [
+            'user'=>$user,
+            'count'=>$count,
+        ]);
     }
 
-    public function loginStore(Request $request)
-    {
-        $name = $request->username;
-        $password = $request->password;
-
-        $data = user::where('name',$name)->first();
-        if($data){ 
-            if(Hash::check($password,$data->password)){
-                Session::put('name',$data->name);
-                Session::put('email',$data->email);
-                Session::put('login',TRUE);
-                
-                return redirect('/');
-            }
-            else{
-                return redirect('auth/login')->with('alert','Password atau Email, Salah !');
-            }
-        }
-        else{
-            return redirect('auth/login')->with('alert','Password atau Email, Salah!');
-        }
-    }
-
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function create()
     {
-        return view('auth.registration');
+        //
     }
 
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function store(Request $request)
     {
-
-        $this->validate($request, [
-            'username'  => 'required',
-            'email' => 'required|min:4|email',
-            'password' => 'required',
-            'repassword' => 'required|same:password',
-        ]);
-
-        // dd("done");
-        $data = User::where('email',$request->email)->first();
-        if(!$data){
-            if($request->password == $request->repassword){
-                $data =  new User();
-                $data->name = $request->username;
-                $data->email = $request->email;
-                $data->password = bcrypt($request->password);
-                $data->save();
-                return redirect('auth/login')->with('alert-success','Kamu berhasil Register');
-            }
-            else{
-                return redirect('auth/registration')->with('alert','Password atau Email, Salah !');
-            }
-        }
-        else{
-            return redirect('auth/registration')->with('alert','Email sudah terdaftar !');
-        }
+        //
     }
 
     /**
@@ -86,7 +80,14 @@ class userController extends Controller
      */
     public function show($id)
     {
-        //
+        $Datauser = DataUser::where('name',$id)->first();
+        $user = User::where('name',$id)->first();
+
+        // dd($user->role);
+        return view('user.detail',[
+            'Datauser'=> $Datauser,
+            'user'=>$user,
+        ]);
     }
 
     /**
@@ -97,7 +98,12 @@ class userController extends Controller
      */
     public function edit($id)
     {
-        //
+        $Datauser = DataUser::where('name',$id)->first();
+        $user = User::where('name',$id)->first();
+        return view('user.edit',[
+            'Datauser'=> $Datauser,
+            'user'=>$user,
+        ]);
     }
 
     /**
@@ -109,7 +115,23 @@ class userController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $emailCheck = User::where('email',$request->email)->first();
+        $user = User::where('name',$request->id)->first();
+        
+        if($emailCheck && $user->email != $request->email )
+            return redirect('/user/edit/'.$id)->with('alert','email is already register');
+
+        $user->name = $request->username;
+        $user->email = $request->email;
+        $user->save();
+
+        $data = DataUser::where('name',$request->id)->first();
+        $data->name = $request->username;
+        $data->no = $request->telp;
+        $data->save();
+
+        Session::put('name',$request->username);
+        return redirect('/user/'.$data->name)->with('success','updated');
     }
 
     /**
@@ -120,11 +142,6 @@ class userController extends Controller
      */
     public function destroy($id)
     {
-       
-    }
-    public function logout()
-    {
-        Session::flush();
-        return redirect('auth/login')->with('alert','Kamu sudah logout');
+        //
     }
 }
