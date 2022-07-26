@@ -142,6 +142,12 @@ class userController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $Datauser = DataUser::where('name',$id)->first();
+        $user = User::where('name',$id)->first();
+
+        DataUser::destroy($Datauser->id);
+        DataUser::destroy($user->id);
+        return redirect('/user/'.$data->name)->with('success','deleted');
+
     }
 }

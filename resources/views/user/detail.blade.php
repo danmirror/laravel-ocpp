@@ -40,6 +40,13 @@
                         </table>
 @if(session('role') == "user")
                         <a href="{{route('userEdit', $user->name)}}" class="btn btn-info"> Edit </a>
+@elseif(session('role') == "admin")
+                        <form action=" {{route('userDelete', $user->name)}} " method="post" class="d-inline ">
+                            @method('delete')
+
+                            @csrf
+                            <button onclick="return confirm('yakin data ingin di hapus?');" type="submit" class="btn btn-outline-danger" >Delete</button>
+                        </form>
 @endif
                     </div>
                     <div class="col-6 mb-4 ">

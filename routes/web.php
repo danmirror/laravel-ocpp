@@ -26,6 +26,7 @@ Route::get('/user', [userController::class, 'index'])->name('userData');
 Route::get('/user/{id}', [userController::class, 'show'])->name('userDetail');
 Route::get('/user/edit/{id}', [userController::class, 'edit'])->name('userEdit');
 Route::post('/user/update/{id}', [userController::class, 'update'])->name('userUpdate');
+Route::delete('/user/del/{id}', [userController::class, 'destroy'])->name('userDelete');
 
 Route::get('/auth/login', [authController::class, 'login'])->name('login');
 Route::get('/auth/logout', [authController::class, 'logout'])->name('logout');
