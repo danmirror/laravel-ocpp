@@ -46,7 +46,7 @@ class ocppCOntroller extends Controller
     }
     public function status_notification(Request $request)
     {
-        $data = heartbeat::where('idHW',$request->header('idST'))->first();
+        $data = StatusNotification::where('idHW',$request->header('idST'))->first();
 
         if($request->header('idST')){
 		
